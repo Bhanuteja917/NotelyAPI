@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Notely.Repository\Notely.Repository.csproj" />
+    <ProjectReference Include="..\Notely.Services\Notely.Services.csproj" />
   </ItemGroup>
 
 </Project>

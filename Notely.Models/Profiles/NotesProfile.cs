@@ -13,6 +13,7 @@ namespace Notely.Models.Profiles
             CreateMap<NotesForCreationDto, Notes>();
             CreateMap<NotesForUpdateDto, Notes>();
             CreateMap<Notes, NotesForUpdateDto>();
+            CreateMap<UserCreationDto, User>();
         }
     }
 }

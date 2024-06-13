@@ -5,10 +5,19 @@ namespace Notely.Repository.DbContexts
 {
     public class NotesDbContext(DbContextOptions options) : DbContext(options)
     {
+        public DbSet<User> Users { get; set; }
         public DbSet<Notes> Notes { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasData(new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = "bhanuteja917",
+                    Password = "Password",
+                    FirstName = "Bhanuteja",
+                    LastName = "Chintha"
+                });
             modelBuilder.Entity<Notes>()
                 .HasData(
                     new Notes()
