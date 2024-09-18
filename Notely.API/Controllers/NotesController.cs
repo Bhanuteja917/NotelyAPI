@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Notely.Models.Entities;
+using Notely.Repository.Entities;
 using Notely.Models.Models;
 using Notely.Services;
 using Microsoft.AspNetCore.JsonPatch;

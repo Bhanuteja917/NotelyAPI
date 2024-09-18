@@ -18,8 +18,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Notely.Models\Notely.Models.csproj" />
-  </ItemGroup>
-
 </Project>

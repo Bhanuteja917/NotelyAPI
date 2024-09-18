@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Notely.Models.Entities;
+using Notely.Repository.Entities;
 using Notely.Models.Models;
 
 namespace Notely.Models.Profiles

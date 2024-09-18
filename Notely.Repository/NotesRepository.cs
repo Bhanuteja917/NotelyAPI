@@ -1,5 +1,5 @@
 ﻿using Notely.Repository.DbContexts;
-using Notely.Models.Entities;
+using Notely.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Notely.Services

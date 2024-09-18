@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Notely.Models.Entities
+namespace Notely.Repository.Entities
 {
     public class Notes
     {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Notely.Models.Entities;
-using Notely.Models.Models;
+using Notely.Repository.Entities;
 using Notely.Repository.DbContexts;
 
 namespace Notely.Repository
