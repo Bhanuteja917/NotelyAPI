@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notely.Models.Models
+namespace Notely.Models.Dto
 {
     public class UserCreationDto
     {

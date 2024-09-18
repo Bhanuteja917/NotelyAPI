@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Notely.Models.Models
+namespace Notely.Models.Dto
 {
-    public class NotesDto
+    public class NotesForCreationDto
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(30)]
         public required string Title { get; set; }

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Notely.Repository.Entities;
-using Notely.Models.Models;
 using Notely.Services;
 using Microsoft.AspNetCore.JsonPatch;
+using Notely.Models.Dto;
 
 namespace Notely.API.Controllers
 {

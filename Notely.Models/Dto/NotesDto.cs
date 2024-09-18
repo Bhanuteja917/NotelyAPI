@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Notely.Models.Models
+namespace Notely.Models.Dto
 {
-    public class NotesForCreationDto
+    public class NotesDto
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(30)]
         public required string Title { get; set; }

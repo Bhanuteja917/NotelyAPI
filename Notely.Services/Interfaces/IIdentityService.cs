@@ -1,5 +1,5 @@
 ﻿using Notely.Repository.Entities;
-using Notely.Models.Models;
+using Notely.Models.Dto;
 
 namespace Notely.Services
 {
