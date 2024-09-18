@@ -1,4 +1,4 @@
-﻿using Notely.Models.Entities;
+﻿using Notely.Repository.Entities;
 
 namespace Notely.Services
 {

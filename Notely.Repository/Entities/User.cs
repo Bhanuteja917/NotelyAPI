@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notely.Models.Entities
+namespace Notely.Repository.Entities
 {
     public class User
     {

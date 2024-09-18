@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Notely.Models\Notely.Models.csproj" />
-    <ProjectReference Include="..\Notely.Repository\Notely.Repository.csproj" />
   </ItemGroup>
 
 </Project>
