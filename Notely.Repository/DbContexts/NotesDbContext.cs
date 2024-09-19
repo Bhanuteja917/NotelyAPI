@@ -8,10 +8,6 @@ namespace Notely.Repository.DbContexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Set the culture to InvariantCulture
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
-
             // Configure your database connection here
             optionsBuilder.UseSqlServer("Server=tcp:bhanuteja.database.windows.net,1433;Initial Catalog=notely;Persist Security Info=False;User ID=bhannuteja917;Password=Iam@indian2002;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
