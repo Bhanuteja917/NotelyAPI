@@ -1,10 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Notely.Repository.Entities; 
+using Notely.Repository.Entities;
+using System.Globalization;
 
 namespace Notely.Repository.DbContexts
 {
-    public class NotesDbContext(DbContextOptions options) : DbContext(options)
+    public class NotesDbContext() : DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Set the culture to InvariantCulture
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
+            // Configure your database connection here
+            optionsBuilder.UseSqlServer("Server=tcp:bhanuteja.database.windows.net,1433;Initial Catalog=notely;Persist Security Info=False;User ID=bhannuteja917;Password=Iam@indian2002;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Notes> Notes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
