@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Notely.Models.Models
+namespace Notely.Models.Dto
 {
     public class NotesForUpdateDto
     {

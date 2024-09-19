@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Notely.Repository.Entities;
-using Notely.Models.Models;
+using Notely.Models.Dto;
 using Notely.Repository;
 
 namespace Notely.Services

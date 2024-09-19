@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Notely.Models.Models;
+using Notely.Models.Dto;
 using Notely.Repository;
 using Notely.Services;
 
