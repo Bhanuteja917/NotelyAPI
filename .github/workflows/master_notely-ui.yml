@@ -29,9 +29,11 @@ jobs:
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
+        env: 
+          PUBLISH_FOLDER: "..\\publish"
         with:
           name: .net-app
-          path: ../publish
+          path: ${{ env.PUBLISH_FOLDER }}
 
   deploy:
     runs-on: windows-latest
