@@ -16,58 +16,59 @@ jobs:
 
     steps:
 
-    - name: Check secrets
-      env:
-        CLIENT_ID: ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}
-        TENANT_ID: ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }}
-        SUB_ID: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }}
-      run: echo "${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}" | sed 's/./& /g' && echo $TENANT_ID | sed 's/./& /g' && echo $SUB_ID | sed 's/./& /g'
-  #     - uses: actions/checkout@v4
-
-  #     - name: Set up .NET Core
-  #       uses: actions/setup-dotnet@v4
-  #       with:
-  #         dotnet-version: '8.x'
-
-  #     - name: Build with dotnet
-  #       run: dotnet build --configuration Release
-
-  #     - name: dotnet publish
-  #       run: dotnet publish .\Notely.API\Notely.API.csproj -c Release -p:PublishDir="C:\Notely\publish"
-
-  #     - name: Upload artifact for deployment job
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: .net-app
-  #         path: "C:\\Notely\\publish"
-
-  # deploy:
-  #   runs-on: windows-latest
-  #   needs: build
-  #   environment:
-  #     name: 'Production'
-  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-  #   permissions:
-  #     id-token: write #This is required for requesting the JWT
-
-  #   steps:
-  #     - name: Download artifact from build job
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: .net-app
+    # - name: Check secrets
+    #   env:
+    #     CLIENT_ID: ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}
+    #     TENANT_ID: ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }}
+    #     SUB_ID: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }}
+    #   run: echo "${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}" | sed 's/./& /g' && echo $TENANT_ID | sed 's/./& /g' && echo $SUB_ID | sed 's/./& /g'
       
-  #     - name: Login to Azure
-  #       uses: azure/login@v2
-  #       with:
-  #         client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}
-  #         tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }}
-  #         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }}
+      - uses: actions/checkout@v4
 
-  #     - name: Deploy to Azure Web App
-  #       id: deploy-to-webapp
-  #       uses: azure/webapps-deploy@v3
-  #       with:
-  #         app-name: 'notely-ui'
-  #         slot-name: 'Production'
-  #         package: .
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish .\Notely.API\Notely.API.csproj -c Release -p:PublishDir="C:\Notely\publish"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: "C:\\Notely\\publish"
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'notely-ui'
+          slot-name: 'Production'
+          package: .
           
