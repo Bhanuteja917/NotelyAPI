@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - master
+      - deployment
   workflow_dispatch:
 
 jobs:
@@ -14,52 +15,55 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
+    - name: Check secrets
+      run: echo ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }} && echo ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }} && ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }} 
+  #     - uses: actions/checkout@v4
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+  #     - name: Set up .NET Core
+  #       uses: actions/setup-dotnet@v4
+  #       with:
+  #         dotnet-version: '8.x'
 
-      - name: dotnet publish
-        run: dotnet publish .\Notely.API\Notely.API.csproj -c Release -p:PublishDir="C:\Notely\publish"
+  #     - name: Build with dotnet
+  #       run: dotnet build --configuration Release
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: .net-app
-          path: "C:\\Notely\\publish"
+  #     - name: dotnet publish
+  #       run: dotnet publish .\Notely.API\Notely.API.csproj -c Release -p:PublishDir="C:\Notely\publish"
 
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
+  #     - name: Upload artifact for deployment job
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: .net-app
+  #         path: "C:\\Notely\\publish"
 
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: .net-app
+  # deploy:
+  #   runs-on: windows-latest
+  #   needs: build
+  #   environment:
+  #     name: 'Production'
+  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  #   permissions:
+  #     id-token: write #This is required for requesting the JWT
+
+  #   steps:
+  #     - name: Download artifact from build job
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: .net-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }}
+  #     - name: Login to Azure
+  #       uses: azure/login@v2
+  #       with:
+  #         client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_85D7C3FA4B784D618234506320D8A90B }}
+  #         tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D134D5B0DE304BD296F6C2DE47B99DF2 }}
+  #         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_68733E71230F4E5FACB242ED18F9306D }}
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'notely-ui'
-          slot-name: 'Production'
-          package: .
+  #     - name: Deploy to Azure Web App
+  #       id: deploy-to-webapp
+  #       uses: azure/webapps-deploy@v3
+  #       with:
+  #         app-name: 'notely-ui'
+  #         slot-name: 'Production'
+  #         package: .
           
